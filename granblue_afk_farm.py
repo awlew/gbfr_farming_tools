@@ -31,6 +31,7 @@ def screenGrab( rect ):
 
     if ( use_grab ):
         image = PIL.ImageGrab.grab( bbox=[ x, y, x+width, y+height ] )
+        #print("x =", x, " y= ", y, " x+width = ", x+width, " y + height = ", y + height)
     else:
         # ImageGrab can be missing under Linux
         dsp  = display.Display()
@@ -66,24 +67,20 @@ if ( __name__ == "__main__" ):
     keyboard = Controller()
 
     ### Loop forever, monitoring the user-specified rectangle of the screen
+    state = "Fighting"
     while ( True ): 
         image = screenGrab( screen_rect )              # Grab the area of the screen
         text  = pytesseract.image_to_string( image )   # OCR the image
 
         # IF the OCR found anything, write it to stdout.
         text = text.strip()
-        #if ( len( text ) > 0 ):
-            #print( text, end = " ")
+        if ( len( text ) > 0 ):
+            print(text)
         text = text.lower()
-        state = 'Fighting'
+
         if ("evalu" in text):
-            print("Evaluation Screen, Clicking to Rewards")
-            keyboard.press(Key.enter)
-            time.sleep(0.25)
-            keyboard.release(Key.enter)
-            print("Clicking to Rewards")
             state = 'Evaluation'
-        if ("continue" in text) or ("playing" in text):
+        elif ("continue" in text) or ("playing" in text):
             print("Prompt to continue found")
             keyboard.press('w')
             time.sleep(0.25)
@@ -92,20 +89,21 @@ if ( __name__ == "__main__" ):
             time.sleep(0.25)
             keyboard.release(Key.enter)
             print("Continueing AFK Farm")
-        if ("Rewards" in text):
-            print("Clicking through Rewards")
-            counter = 0
-            while (counter < 10):
-                keyboard.press(Key.enter)
-                time.sleep(0.25)
-                keyboard.release(Key.enter)
-                counter += 1
-            state = 'Rewards'
+            state = 'Prompt'
+        elif ("rewards" in text) or ("reviewing" in text) :
+            state = "Rewards"
+        else:
+            if state == 'Rewards':
+                print("Back to combat")
+                state = "Fighting"
         print(state)
         if (state == "Evaluation") or (state == "Rewards"):
+            keyboard.press(Key.enter)
+            time.sleep(0.25)
+            keyboard.release(Key.enter)
             counter = 0.5
         else:
-            counter = 5
+            counter = 3
         while (counter > 0):
             counter = counter - 1
             time.sleep(1)
