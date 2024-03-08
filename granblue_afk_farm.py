@@ -75,6 +75,14 @@ if ( __name__ == "__main__" ):
         #if ( len( text ) > 0 ):
             #print( text, end = " ")
         text = text.lower()
+        state = 'Fighting'
+        if ("evalu" in text):
+            print("Evaluation Screen, Clicking to Rewards")
+            keyboard.press(Key.enter)
+            time.sleep(0.25)
+            keyboard.release(Key.enter)
+            print("Clicking to Rewards")
+            state = 'Evaluation'
         if ("continue" in text) or ("playing" in text):
             print("Prompt to continue found")
             keyboard.press('w')
@@ -84,8 +92,21 @@ if ( __name__ == "__main__" ):
             time.sleep(0.25)
             keyboard.release(Key.enter)
             print("Continueing AFK Farm")
-        counter = 5
+        if ("Rewards" in text):
+            print("Clicking through Rewards")
+            counter = 0
+            while (counter < 10):
+                keyboard.press(Key.enter)
+                time.sleep(0.25)
+                keyboard.release(Key.enter)
+                counter += 1
+            state = 'Rewards'
+        print(state)
+        if (state == "Evaluation") or (state == "Rewards"):
+            counter = 0.5
+        else:
+            counter = 5
         while (counter > 0):
-            print(counter)
             counter = counter - 1
             time.sleep(1)
+        
