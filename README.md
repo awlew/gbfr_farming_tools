@@ -1,3 +1,4 @@
+0. Get some form of Python 3 (3.12.x is the latest as writing this)
 1. Install tesseract: https://github.com/UB-Mannheim/tesseract/wiki
 2. Edit path with C:\program files\tesseract
 3. Open a cmd.exe/Command Prompt through Windows Search or Windows Explorer 
