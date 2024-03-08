@@ -93,11 +93,11 @@ if ( __name__ == "__main__" ):
         elif ("rewards" in text) or ("reviewing" in text) :
             state = "Rewards"
         else:
-            if state == 'Rewards':
+            if (state == "Rewards") or (state == "Prompt"):
                 print("Back to combat")
                 state = "Fighting"
         print(state)
-        if (state == "Evaluation") or (state == "Rewards"):
+        if (state == "Evaluation") or (state == "Rewards") or (state == "Prompt"):
             keyboard.press(Key.enter)
             time.sleep(0.25)
             keyboard.release(Key.enter)
