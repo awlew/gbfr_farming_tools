@@ -5,6 +5,7 @@ import pytesseract
 from PIL import Image
 import PIL
 from pynput.keyboard import Key, Controller
+from pynput.mouse import Button, Controller as MouseController
 import time
 
 
@@ -65,6 +66,7 @@ if ( __name__ == "__main__" ):
     screen_rect = [ x, y, width, height ]  
     #print( EXE + ": watching " + str( screen_rect ) )
     keyboard = Controller()
+    mouse = MouseController()
 
     ### Loop forever, monitoring the user-specified rectangle of the screen
     state = "Fighting"
@@ -85,9 +87,11 @@ if ( __name__ == "__main__" ):
             keyboard.press('w')
             time.sleep(0.25)
             keyboard.release('w')
-            keyboard.press(Key.enter)
+            #keyboard.press(Key.enter)
+            mouse.press(Button.left)
             time.sleep(0.25)
-            keyboard.release(Key.enter)
+            #keyboard.release(Key.enter)
+            mouse.release(Button.left)
             print("Continueing AFK Farm")
             state = 'Prompt'
         elif ("rewards" in text) or ("reviewing" in text) :
@@ -98,10 +102,12 @@ if ( __name__ == "__main__" ):
                 state = "Fighting"
         print(state)
         if (state == "Evaluation") or (state == "Rewards") or (state == "Prompt"):
-            keyboard.press(Key.enter)
+            #keyboard.press(Key.enter)
+            mouse.press(Button.left)
             time.sleep(0.25)
-            keyboard.release(Key.enter)
-            counter = 0.5
+            #keyboard.release(Key.enter)
+            mouse.release(Button.left)
+            counter = 1
         else:
             counter = 3
         while (counter > 0):
