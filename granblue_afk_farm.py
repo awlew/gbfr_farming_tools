@@ -154,13 +154,29 @@ if ( __name__ == "__main__" ):
         while (counter > 0):
             if (state == "Fighting" and inMode == 1):
                 mouse.press(Button.right)
-                time.sleep(0.25)
+                time.sleep(0.10)
+                pynkeyboard.press('r')
+                time.sleep(0.10)
+                pynkeyboard.press('g')
+                time.sleep(0.10)
                 mouse.release(Button.right)
-            counter = counter - sleepTime
-            time.sleep(sleepTime)
+                time.sleep(0.10)
+                pynkeyboard.release('r')
+                time.sleep(0.05)
+                pynkeyboard.release('g')
+                time.sleep(0.05)
+                counter = counter - 0.5
+            else:
+                counter = counter - sleepTime
+                time.sleep(sleepTime)
         if (state == "Fighting" and inMode == 1):
             mouse.press(Button.right)
-            time.sleep(0.25)
+            time.sleep(0.05)
+            mouse.press(Button.middle)
+            time.sleep(0.10)
             mouse.release(Button.right)
+            time.sleep(0.05)
+            mouse.release(Button.middle)
+            time.sleep(0.05)
     print('Farming has ended, see you next time :)')            
         
