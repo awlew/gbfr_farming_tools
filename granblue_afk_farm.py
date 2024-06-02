@@ -120,7 +120,7 @@ if ( __name__ == "__main__" ):
 
         if ("evalu" in text):
             state = 'Evaluation'
-        elif ("Skip" in text):
+        elif ("skip" in text) or ("scene" in text):
             print("Cutscene to Skip Found")
             pynkeyboard.press('w')
             time.sleep(0.25)
@@ -160,8 +160,6 @@ if ( __name__ == "__main__" ):
         else:
             counter = 2
         sleepTime = 1
-        if (state == "Fighting" and inMode == 1):
-            sleepTime = 0.25
         while (counter > 0):
             if (state == "Fighting" and inMode == 1):
                 mouse.press(Button.right)
