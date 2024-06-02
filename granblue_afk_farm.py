@@ -158,7 +158,7 @@ if ( __name__ == "__main__" ):
             mouse.release(Button.left)
             counter = 1
         else:
-            counter = 2.5
+            counter = 2
         sleepTime = 1
         if (state == "Fighting" and inMode == 1):
             sleepTime = 0.25
