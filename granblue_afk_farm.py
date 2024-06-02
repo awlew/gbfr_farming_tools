@@ -120,6 +120,17 @@ if ( __name__ == "__main__" ):
 
         if ("evalu" in text):
             state = 'Evaluation'
+        elif ("Skip" in text):
+            print("Cutscene to Skip Found")
+            pynkeyboard.press('w')
+            time.sleep(0.25)
+            pynkeyboard.release('w')
+            #pynkeyboard.press(Key.enter)
+            mouse.press(Button.left)
+            time.sleep(0.25)
+            #pynkeyboard.release(Key.enter)
+            mouse.release(Button.left)
+            state = "Fighting"
         elif ("continue" in text) or ("playing" in text):
             print("Prompt to continue found")
             pynkeyboard.press('w')
